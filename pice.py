@@ -45,18 +45,21 @@ class Pice():
                     self.pice_image = pygame.image.load("assets/W_King.png").convert_alpha()
                 
         else:
-            debuger.log_force("", "Nutze etweder enemy oder player als Name für die seite eines pices")
+            self.debuger.log_force("", "Nutze etweder enemy oder player als Name für die seite eines pices")
 
         return self.pice_image
 
     def update(self):
         self.draw()
 
-    def draw(self):
+    def calc_real_pos(self):
         x = 150 + ((self.pos[0] - 1.08) * 91)
         y = 950 - ((self.pos[1] + 2.12) * 91)
-        print(x, ",", y)
-        
-        
+        return (x, y)
+    
+    def draw(self):
+        x, y = self.calc_real_pos()
+
         self.pice_image = pygame.transform.scale(self.pice_image, (80, 160))
         self.screen.blit(self.pice_image, (x, y))
+

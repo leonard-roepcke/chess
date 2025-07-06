@@ -12,6 +12,7 @@ class Pice_manager():
     def update(self):
         for i in self.pices:
             i.update()
+        self.select()
     
     def add_board(self):
         
@@ -31,3 +32,4 @@ class Pice_manager():
         enemy_back_row = ["Rook", "Knight", "Bishop", "Queen", "King", "Bishop", "Knight", "Rook"]
         for x, name in enumerate(enemy_back_row):
             self.pices.append(pice.Pice(self.screen, name, pos=(x + 1, 7 + 1), side="enemy"))
+
