@@ -12,7 +12,7 @@ class Pice_manager():
     def update(self):
         for i in self.pices:
             i.update()
-        self.select()
+        #self.select()
     
     def add_board(self):
         
