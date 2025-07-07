@@ -5,6 +5,7 @@ class Pice_manager():
     def __init__(self, screen):
         self.pices = []
         self.screen = screen
+        self.selected_piece = None
 
     def add_pice(self, pice):
         self.pices.append(pice)
@@ -13,6 +14,13 @@ class Pice_manager():
         for i in self.pices:
             i.update()
         #self.select()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                self.select_pice(mouse_pos)
     
     def add_board(self):
         
@@ -32,4 +40,9 @@ class Pice_manager():
         enemy_back_row = ["Rook", "Knight", "Bishop", "Queen", "King", "Bishop", "Knight", "Rook"]
         for x, name in enumerate(enemy_back_row):
             self.pices.append(pice.Pice(self.screen, name, pos=(x + 1, 7 + 1), side="enemy"))
+
+    def select_pice(self, mouse):
+        for i_pice in self.pices:
+            if i_pice.check_select(mouse):
+                self.selected_piece = i_pice
 

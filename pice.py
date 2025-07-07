@@ -9,6 +9,7 @@ class Pice():
         self.pos = pos
         self.screen = screen
         self.pice_image = self.load_image(self.side, self.typ)
+        
     
     def avalible_pices(self):
         print("Pawn")
@@ -63,3 +64,12 @@ class Pice():
         self.pice_image = pygame.transform.scale(self.pice_image, (80, 160))
         self.screen.blit(self.pice_image, (x, y))
 
+
+    def check_select(self, mouse_pos):
+        x, y = self.calc_real_pos()  # gibt Pixel-Position zurück
+        size = 91
+
+        if x <= mouse_pos[0] <= x + size and y <= mouse_pos[1] <= y + size:
+            return True
+        else:
+            return False
