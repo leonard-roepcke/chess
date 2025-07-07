@@ -1,5 +1,8 @@
 import pygame
 import pice
+from helper import debug
+debuger = debug.Debuger()
+debuger.start_log()
 
 class Pice_manager():
     def __init__(self, screen):
@@ -12,7 +15,10 @@ class Pice_manager():
 
     def update(self):
         for i in self.pices:
-            i.update()
+            if self.selected_piece == i:
+                i.update(select=True)
+            else:
+                i.update()
         #self.select()
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -21,6 +27,8 @@ class Pice_manager():
             if event.type == pygame.MOUSEBUTTONDOWN:
                 mouse_pos = pygame.mouse.get_pos()
                 self.select_pice(mouse_pos)
+        
+        debuger.log("seectet pice", f"id:{self.selected_piece}")
     
     def add_board(self):
         
@@ -42,6 +50,7 @@ class Pice_manager():
             self.pices.append(pice.Pice(self.screen, name, pos=(x + 1, 7 + 1), side="enemy"))
 
     def select_pice(self, mouse):
+        mouse = mouse[0], mouse[1] -100
         for i_pice in self.pices:
             if i_pice.check_select(mouse):
                 self.selected_piece = i_pice

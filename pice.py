@@ -50,8 +50,12 @@ class Pice():
 
         return self.pice_image
 
-    def update(self):
-        self.draw()
+    def update(self, select=False):
+        
+        if select:
+            self.draw_select()
+        else:
+            self.draw()
 
     def calc_real_pos(self):
         x = 150 + ((self.pos[0] - 1.08) * 91)
@@ -64,6 +68,12 @@ class Pice():
         self.pice_image = pygame.transform.scale(self.pice_image, (80, 160))
         self.screen.blit(self.pice_image, (x, y))
 
+
+    def draw_select(self):
+        x, y = self.calc_real_pos()
+
+        self.pice_image = pygame.transform.scale(self.pice_image, (96, 192))
+        self.screen.blit(self.pice_image, (x - 8, y - 32))
 
     def check_select(self, mouse_pos):
         x, y = self.calc_real_pos()  # gibt Pixel-Position zurück
