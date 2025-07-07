@@ -79,7 +79,7 @@ class Pice():
         x, y = self.calc_real_pos()  # gibt Pixel-Position zurück
         size = 91
 
-        if x <= mouse_pos[0] <= x + size and y <= mouse_pos[1] <= y + size:
+        if (x-15) <= mouse_pos[0] <= (x + size) and y <= mouse_pos[1] <= (y + size):
             return True
         else:
             return False
